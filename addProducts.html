@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Add Products!</title>
+</head>
+
+<body>
+    <div class="container pl-5 py-4 mt-5 bg-light">
+        <div class="row">
+            <div class="cold-md-12">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Product Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="txtdescription" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                            <label for="brand">Brand</label>
+                            <input type="text" class="form-control" id="txtBrand" rows="3"></textarea>
+                        </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="text" class="form-control" id="txtprice" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="Image">Upload picture</label>
+                        <input type="text" class="form-control" id="picture">
+                    </div>
+                    <div class="form-group">
+                            <input type="button"  class="btn btn-primary"  onclick="submitProducts()" value="Submit Products" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    submitProducts= async()=> {
+
+       var products={
+        name :document.querySelector("#name").value,
+        description :document.querySelector("#txtdescription").value,
+        brand:document.querySelector("#txtBrand").value,
+        price :document.querySelector("#txtprice").value,
+        imageUrl :document.querySelector("#picture").value
+       };
+
+       console.log(products);
+       let username = 'user8';
+        let password = 'eAqd2ZPk3Rbtm8Mw';
+        let url = "https://cors-anywhere.herokuapp.com/https://strive-school-testing-apis.herokuapp.com/api/product/";
+        let authString = `${username}:${password}`
+        let headers = new Headers({
+            "Content-Type": "application/json",
+        });
+        headers.set('Authorization', 'Basic ' + btoa(authString))
+      
+         var response=await fetch(url,{method: 'POST', body:JSON.stringify(products), headers: headers});
+         
+         var jSon=await response.json();
+         
+         location.replace("file:///D:/Rushi/GITHUB/CRUD_Excercise/Index.html");
+    }
+    
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
